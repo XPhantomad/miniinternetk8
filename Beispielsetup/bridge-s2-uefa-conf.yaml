@@ -1,0 +1,12 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: bridge-s2-uefa-conf
+spec:
+  config: '{
+    "cniVersion": "0.3.1",
+    "name": "bridge-s2-uefa",
+    "type": "bridge",
+    "bridge": "mynet0",
+    "ipam": {}
+}'

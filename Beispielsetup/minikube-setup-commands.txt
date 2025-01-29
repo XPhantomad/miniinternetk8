@@ -1,0 +1,51 @@
+minikube start --cpus 4 --memory 16384 --cni calico 
+kubectl calico version  (--> verison conflict but not a huge problem)
+
+# Setup multus
+minikube stop
+minikube start --network-plugin=cni --enable-default-cni --extra-config=kubeadm.pod-network-cidr=10.244.0.0/16
+kubectl apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml
+kubectl taint nodes --all node-role.kubernetes.io/master-
+--> gibt not found zurück - muss so 
+minikube stop
+minikube start --network-plugin=cni --enable-default-cni --extra-config=kubeadm.pod-network-cidr=10.244.0.0/16
+kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset-thick.yml
+
+--> ab jetzt auch mit "minikube start" Neustart möglich
+
+kubectl apply -f nad-ssh-global.yaml
+kubectl apply -f nad-ssh-intern-as3.yaml
+(kubectl get network-attachment-definitions)
+kubectl apply -f pod+service.yaml --> ssh-container Gruppe 3
+
+
+
+
+
+
+
+
+kubectl create namespace as2
+kubectl create namespace as1
+kubectl label namespace as2 namespace=as2  (--> sehr wichtig, damit Namespaces von Networkpolicy aus adressiert werden können)
+kubectl label namespace as1 namespace=as1
+
+kubectl apply -f mi-ssh6.yaml
+kubectl apply -f mi-ssh2.yaml --> erzeugt Pods mit festen IPs siehe file
+
+kubectl apply -f namespace-as2-isolation-policy.yaml (--> legt fest, dass pods nur noch auf Pods im Namespace zugreifen dürfen und von diesen zugegriffen werden)
+kubectl get networkpolicy -n as2
+[ kubectl delete networkpolicy -n as2 ...]
+
+kubectl apply -f host.yaml
+kubectl apply -f switch1.yaml
+kubectl apply -f router1.yaml
+kubectl apply -f host2.yaml
+kubectl apply -f switch2.yaml
+kubectl apply -f router2.yaml
+
+kubectl exec -n as2 -it pod/mi-ssh2-568f449c74-ccw7j -- bash
+kubectl exec -n as1 -it pod/mi-ssh6-6c4cd84b4d-qk6nm -- bash
+
+kubectl create -f nad-ssh-intern-as3.yaml
+kubectl create -f nad-ssh-global.yaml
