@@ -5,15 +5,15 @@ apiVersion: v1
 kind: Pod
 ## 3. Set metadata for this resource
 metadata:
-  name: mihost3-nd-s1-pod ## Name of the Pod
+  name: mi3-uefa2-pod ## Name of the Pod
   labels: ## Labels help us find and organize Pods
-    app: mihost3-nd-s1
+    app: mi3-uefa2
   annotations:
-    k8s.v1.cni.cncf.io/networks: sshintern-conf3, bridge-s1-fifa-conf  
+    k8s.v1.cni.cncf.io/networks: sshintern-conf3, bridge-s2-uefa-conf  
 ## 4. Define what the Pod should contain
 spec:
   containers: ## Pod can run one or more containers
-    - name: mihost3-nd-s1
+    - name: mi3-uefa2
       image: docker.io/miniinterneteth/d_host:latest
       ports: 
         - containerPort: 22
