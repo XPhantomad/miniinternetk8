@@ -18,10 +18,24 @@ kubectl apply -f nad-ssh-intern-as3.yaml
 (kubectl get network-attachment-definitions)
 kubectl apply -f pod+service.yaml --> ssh-container Gruppe 3
 
+# SSH-Schlüssel kopieren --> Schlüssel liegen im Beispielsetup
+mkdir groups/g3
+ssh-keygen -t rsa -b 4096 -C "ta key" -P "" -f "groups/id_rsa" -q
+chmod +r groups/id_rsa
+cp groups/id_rsa.pub groups/authorized_keys
+
+ssh-keygen -t rsa -b 4096 -C "internal key group 3" -P "" -f groups/g3/id_rsa -q
 
 
+## auf dem SSH-Container (--no-preserve to add files to root user and group)
+kubectl cp ./groups/g3/id_rsa missh7-6c67556d8b-624ph:/root/.ssh/id_rsa --no-preserve
+kubectl cp ./groups/g3/id_rsa.pub missh7-6c67556d8b-624ph:/root/.ssh/id_rsa.pub --no-preserve
+kubectl cp ./groups/authorized_keys missh7-6c67556d8b-624ph:/root/.ssh/authorized_keys --no-preserve
 
-
+## auf den Router/Switch/Host Containern
+kubectl cp ./groups/g3/id_rsa.pub mi3-s1-pod:/root/.ssh/authorized_keys --no-preserve
+kubectl cp ./groups/g3/id_rsa.pub mi3-base-pod:/root/.ssh/authorized_keys --no-preserve
+...
 
 
 
