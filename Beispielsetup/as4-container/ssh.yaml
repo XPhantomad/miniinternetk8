@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mi4-ssh
+  name: mi4-ssh-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mi4-ssh
+  template:
+    metadata:
+      name: mi4-ssh-pod
+      labels:
+        app: mi4-ssh
+      annotations:
+        k8s.v1.cni.cncf.io/networks: mi4-ssh-conf
+        'cni.projectcalico.org/ipAddrs': '["158.4.0.2"]'
+    spec:
+      containers: ## Pod can run one or more containers
+        - name: mi4-ssh ## Name of the container
+          image: docker.io/miniinterneteth/d_ssh:latest ## Which container image to use
+          ports: ## Which ports to expose
+            - containerPort: 22
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mi4-ssh-service
+spec:
+  selector:
+    app: mi4-ssh
+  ports:
+    - protocol: TCP
+      port: 22
+      targetPort: 22
+  type: NodePort

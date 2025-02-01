@@ -3,4 +3,4 @@
 # Now, whitelist anything that's a directory
 !.gitignore
 !Beispielsetup/
-!Beispielsetup/*
+!Beispielsetup/**
