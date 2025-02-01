@@ -4,6 +4,7 @@ metadata:
   labels:
     app: mi4-ssh
   name: mi4-ssh-deployment
+  namespace: as4
 spec:
   replicas: 1
   selector:
@@ -29,6 +30,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mi4-ssh-service
+  namespace: as4
 spec:
   selector:
     app: mi4-ssh
