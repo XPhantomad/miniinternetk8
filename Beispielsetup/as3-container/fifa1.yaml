@@ -26,4 +26,5 @@ spec:
     hostPath:
       path: /home/adrian/miniinternetk8/beispielsetup/groups/g3 # directory location on host
       
+    
       
