@@ -9,7 +9,7 @@ metadata:
   labels: ## Labels help us find and organize Pods
     app: mi3-fifa1
   annotations:
-    k8s.v1.cni.cncf.io/networks: sshintern-conf3, bridge-s1-fifa-conf  
+    k8s.v1.cni.cncf.io/networks: sshintern-conf3@ssh, bridge-s1-fifa-conf@s1  
 ## 4. Define what the Pod should contain
 spec:
   containers: ## Pod can run one or more containers
@@ -17,3 +17,13 @@ spec:
       image: docker.io/miniinterneteth/d_host:latest
       ports: 
         - containerPort: 22
+      volumeMounts:
+      - mountPath: /root/.ssh
+        name: example-volume
+  volumes:
+  - name: example-volume
+    # mount /data/foo, but only if that directory already exists
+    hostPath:
+      path: /home/adrian/miniinternetK8/Beispielsetup/groups/g3 # directory location on host
+      
+      
