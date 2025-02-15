@@ -18,7 +18,7 @@ spec:
       ports: 
         - containerPort: 22
       volumeMounts:
-      - mountPath: /
+      - mountPath: /root
         name: example-volume
   volumes:
   - name: example-volume
