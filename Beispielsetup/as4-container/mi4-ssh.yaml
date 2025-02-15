@@ -16,8 +16,10 @@ spec:
       labels:
         app: mi4-ssh
       annotations:
-        k8s.v1.cni.cncf.io/networks: mi4-ssh-conf
-        'cni.projectcalico.org/ipAddrs': '["158.4.0.2"]'
+        k8s.v1.cni.cncf.io/networks: as4/mi4-ssh-conf  # as4/ to acces nad in a namespace
+        #k8s.v1.cni.cncf.io/networks: '[
+        #    { "name" : "nad-config", "namespace": "testns1", "interface" : "interfacename" }
+        #  ]'
     spec:
       containers: ## Pod can run one or more containers
         - name: mi4-ssh ## Name of the container

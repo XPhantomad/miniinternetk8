@@ -9,7 +9,7 @@ metadata:
   labels: ## Labels help us find and organize Pods
     app: mi3-s3
   annotations:
-    k8s.v1.cni.cncf.io/networks: sshintern-conf3, bridge-s1-fifa-conf #, bridgeS1-UEFA-conf, bridgeS2, bridgeS3, bridgeRouter-ZURI
+    k8s.v1.cni.cncf.io/networks: static-ip-s3, sshintern-conf3 # , bridge-s3-fifa-conf, bridge-s3-uefa-conf, bridge-s3-fifa-conf bridge-s3-s1, bridge-s3-s2,
 ## 4. Define what the Pod should contain
 spec:
   containers: ## Pod can run one or more containers

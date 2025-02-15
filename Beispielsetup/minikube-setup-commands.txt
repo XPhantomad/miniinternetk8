@@ -35,6 +35,10 @@ kubectl cp ./groups/authorized_keys missh7-6c67556d8b-624ph:/root/.ssh/authorize
 ## auf den Router/Switch/Host Containern
 kubectl cp ./groups/g3/id_rsa.pub mi3-s1-pod:/root/.ssh/authorized_keys --no-preserve
 kubectl cp ./groups/g3/id_rsa.pub mi3-base-pod:/root/.ssh/authorized_keys --no-preserve
+kubectl cp ./groups/g3/id_rsa.pub mi3-fifa2-pod:/root/.ssh/authorized_keys --no-preserve
+kubectl cp ./groups/g3/id_rsa.pub mi3-s2-pod:/root/.ssh/authorized_keys --no-preserve
+kubectl cp ./groups/g3/id_rsa.pub mi3-uefa2-pod:/root/.ssh/authorized_keys --no-preserve
+
 ...
 
 
