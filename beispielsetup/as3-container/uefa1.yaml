@@ -18,13 +18,14 @@ spec:
       ports: 
         - containerPort: 22
       volumeMounts:
-      - mountPath: /root/.ssh
+      - mountPath: /
         name: example-volume
   volumes:
   - name: example-volume
     # mount /data/foo, but only if that directory already exists
     hostPath:
-      path: /home/adrian/miniinternetk8/beispielsetup/groups/  # directory location on host
+      path: /home/adrian/miniinternetk8/beispielsetup/groups/g3  # directory location on host 
+      # --> is not relevant, data on the pod is persistet but not synchronized
       
 
       
