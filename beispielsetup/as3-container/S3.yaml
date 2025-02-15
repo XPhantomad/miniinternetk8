@@ -1,0 +1,19 @@
+## --- Beginning of YAML file ---
+## 1. Tell Kubernetes which API version to use
+apiVersion: v1
+## 2. Declare what kind of resource we want to create
+kind: Pod
+## 3. Set metadata for this resource
+metadata:
+  name: mi3-s3-pod ## Name of the Pod
+  labels: ## Labels help us find and organize Pods
+    app: mi3-s3
+  annotations:
+    k8s.v1.cni.cncf.io/networks: sshintern-conf3, bridge-s1-fifa-conf #, bridgeS1-UEFA-conf, bridgeS2, bridgeS3, bridgeRouter-ZURI
+## 4. Define what the Pod should contain
+spec:
+  containers: ## Pod can run one or more containers
+    - name: mi3-s3
+      image: docker.io/miniinterneteth/d_switch:latest
+      ports: 
+        - containerPort: 22
