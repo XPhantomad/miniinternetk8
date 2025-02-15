@@ -23,6 +23,14 @@ spec:
           image: docker.io/miniinterneteth/d_ssh:latest ## Which container image to use
           ports: ## Which ports to expose
             - containerPort: 22
+         volumeMounts:
+          - mountPath: /root/.ssh
+            name: example-volume
+      volumes:
+      - name: example-volume
+    # mount /data/foo, but only if that directory already exists
+    hostPath:
+      path: /home/adrian/miniinternetk8/beispielsetup/groups
 ---
 
 apiVersion: v1
