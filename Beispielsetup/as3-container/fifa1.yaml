@@ -24,6 +24,6 @@ spec:
   - name: example-volume
     # mount /data/foo, but only if that directory already exists
     hostPath:
-      path: /home/adrian/ # directory location on host
+      path: /home/adrian/miniinternetk8/beispielsetup/groups/g3 # directory location on host
       
       
