@@ -15,7 +15,7 @@ spec:
       labels:
         app: missh7
       annotations:
-        k8s.v1.cni.cncf.io/networks: sshglobal-conf, sshintern-conf3
+        k8s.v1.cni.cncf.io/networks: sshintern-conf3@ssh
         'cni.projectcalico.org/ipAddrs': '["158.3.0.2"]'
     spec:
       containers: ## Pod can run one or more containers
@@ -24,7 +24,7 @@ spec:
           ports: ## Which ports to expose
             - containerPort: 22
          volumeMounts:
-          - mountPath: /root/.ssh
+          - mountPath: /root
             name: example-volume
       volumes:
       - name: example-volume

@@ -5,15 +5,15 @@ apiVersion: v1
 kind: Pod
 ## 3. Set metadata for this resource
 metadata:
-  name: mi3-fifa2-pod ## Name of the Pod
+  name: mi3-uefa3-pod ## Name of the Pod
   labels: ## Labels help us find and organize Pods
-    app: mi3-fifa2
+    app: mi3-uefa3
   annotations:
-    k8s.v1.cni.cncf.io/networks: sshintern-conf3@ssh, bridge-s2-fifa-conf@s2  
+    k8s.v1.cni.cncf.io/networks: sshintern-conf3@ssh, bridge-s3-uefa-conf@s3 
 ## 4. Define what the Pod should contain
 spec:
   containers: ## Pod can run one or more containers
-    - name: mi3-fifa2
+    - name: mi3-uefa3
       image: docker.io/miniinterneteth/d_host:latest
       ports: 
         - containerPort: 22
