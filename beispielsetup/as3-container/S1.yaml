@@ -5,16 +5,16 @@ apiVersion: v1
 kind: Pod
 ## 3. Set metadata for this resource
 metadata:
-  name: miswitch3-s1-pod ## Name of the Pod
+  name: mi3-s1-pod ## Name of the Pod
   labels: ## Labels help us find and organize Pods
-    app: miswitch3-s1
+    app: mi3-s1
   annotations:
     k8s.v1.cni.cncf.io/networks: bridge-s1-fifa-conf@fifa1, bridge-s1-uefa-conf@uefa1, bridge-s2-s1-conf@s2, bridge-s3-s1-conf@s3, bridge-s1-zuri-conf@zuri
     'cni.projectcalico.org/ipAddrs': '["158.3.100.3"]'
 ## 4. Define what the Pod should contain
 spec:
   containers: ## Pod can run one or more containers
-    - name: miswitch3-s1
+    - name: mi3-s1
       image: docker.io/miniinterneteth/d_switch:latest
       ports: 
         - containerPort: 22

@@ -10,7 +10,7 @@ metadata:
     app: mi3-fifa3
   annotations:
     k8s.v1.cni.cncf.io/networks: bridge-s3-fifa-conf@s3 
-    'cni.projectcalico.org/ipAddrs': '["158.3.200.9"]' 
+    'cni.projectcalico.org/ipAddrs': '["158.3.200.9"]'
 ## 4. Define what the Pod should contain
 spec:
   containers: ## Pod can run one or more containers
