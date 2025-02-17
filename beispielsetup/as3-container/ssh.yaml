@@ -2,28 +2,29 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: missh7
-  name: missh7
+    app: missh3
+  name: missh3
+  namespace: as3
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: missh7
+      app: missh3
   template:
     metadata:
-      name: missh7
+      name: missh3
       labels:
-        app: missh7
+        app: missh3
       annotations:
-        k8s.v1.cni.cncf.io/networks: sshintern-conf3@ssh
+        k8s.v1.cni.cncf.io/networks:
         'cni.projectcalico.org/ipAddrs': '["158.3.0.2"]'
     spec:
       containers: ## Pod can run one or more containers
-        - name: missh7 ## Name of the container
+        - name: missh3 ## Name of the container
           image: docker.io/miniinterneteth/d_ssh:latest ## Which container image to use
           ports: ## Which ports to expose
-            - containerPort: 22
-         volumeMounts:
+          - containerPort: 22
+          volumeMounts:
           - mountPath: /root
             name: example-volume
       volumes:
@@ -36,10 +37,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: missh7
+  name: missh3
+  namespace: as3
 spec:
   selector:
-    app: missh7
+    app: missh3
   ports:
     - protocol: TCP
       port: 22

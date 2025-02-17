@@ -8,8 +8,10 @@ metadata:
   name: mi3-base-pod ## Name of the Pod
   labels: ## Labels help us find and organize Pods
     app: mi3-base
+  namespace: as3
   annotations:
-    k8s.v1.cni.cncf.io/networks: sshintern-conf3@ssh, bridge-s2-base-conf@s2, 
+    k8s.v1.cni.cncf.io/networks: bridge-s2-base-conf@s2, 
+    'cni.projectcalico.org/ipAddrs': '["158.3.10.1"]'
 ## 4. Define what the Pod should contain
 spec:
   containers: ## Pod can run one or more containers
