@@ -67,3 +67,17 @@ kubectl exec -n as1 -it pod/mi-ssh6-6c4cd84b4d-qk6nm -- bash
 
 kubectl create -f nad-ssh-intern-as3.yaml
 kubectl create -f nad-ssh-global.yaml
+
+
+
+##### microk8s #######
+# Install it on both VMs
+sudo snap install microk8s --classic --channel=1.32
+sudo usermod -a -G microk8s $USER
+mkdir -p ~/.kube
+chmod 0700 ~/.kube
+
+# on first VM
+microk8s add-node
+# on secound VM
+microk8s join 172.26.122.171:25000/9ce1ac3b56014d9e8923ad6489e87f66/bc5469f13b95
