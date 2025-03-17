@@ -10,12 +10,24 @@ metadata:
     app: mi3-fifa4
   annotations:
     k8s.v1.cni.cncf.io/networks: bridge-s4-fifa-conf@s4
-    'cni.projectcalico.org/ipAddrs': '["158.3.200.12"]'
+    'cni.projectcalico.org/ipAddrs': '["158.3.200.11"]'
 ## 4. Define what the Pod should contain
 spec:
   containers: ## Pod can run one or more containers
     - name: mi3-fifa4
       image: docker.io/miniinterneteth/d_host:latest
+      securityContext:
+        capabilities:
+          add: ["NET_ADMIN"]
+      sysctls:
+        - name: net.ipv4.icmp_ratelimit
+          value: "0"
+        - name: net.ipv4.icmp_echo_ignore_broadcasts
+          value: "0"
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: "0"
+        - name: net.ipv6.icmp.ratelimit
+          value: "0"
       ports: 
         - containerPort: 22
       volumeMounts:

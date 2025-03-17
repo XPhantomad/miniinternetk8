@@ -16,6 +16,31 @@ spec:
   containers: ## Pod can run one or more containers
     - name: mi3-s2
       image: docker.io/miniinterneteth/d_switch:latest
+      securityContext:
+        capabilities:
+          add: ["NET_ADMIN", "ALL"]
+          drop: ["SYS_RESOURCE"]
+      sysctls:
+        - name: net.ipv4.ip_forward
+          value: "1"
+        - name: net.ipv4.icmp_ratelimit
+          value: "0"
+        - name: net.ipv4.fib_multipath_hash_policy
+          value: "1"
+        - name: net.ipv4.conf.all.rp_filter
+          value: "0"
+        - name: net.ipv4.conf.default.rp_filter
+          value: "0"
+        - name: net.ipv4.conf.lo.rp_filter
+          value: "0"
+        - name: net.ipv4.icmp_echo_ignore_broadcasts
+          value: "0"
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: "0"
+        - name: net.ipv6.conf.all.forwarding
+          value: "1"
+        - name: net.ipv6.icmp.ratelimit
+          value: "0"
       ports: 
         - containerPort: 22
       volumeMounts:
